@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 //app.use(cors());
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' ? [process.env.FRONTEND_URL, 'https://your-deployed-frontend.vercel.app'] :'http://localhost:5173',
+  origin: process.env.NODE_ENV === 'production' ? [process.env.FRONTEND_URL, 'https://othello-frontend.vercel.app/'] :'http://localhost:5173',
   credentials: true, // Allow cookies to be sent
   methods:['GET','POST','PUT','DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
