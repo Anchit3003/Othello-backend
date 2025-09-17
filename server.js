@@ -24,12 +24,22 @@ app.use((req, res, next) => {
 });
 //app.use(cors());
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' ? [process.env.FRONTEND_URL, 'https://othello-frontend.vercel.app/'] :'http://localhost:5173',
-  credentials: true, // Allow cookies to be sent
-  methods:['GET','POST','PUT','DELETE'],
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'https://othello-frontend.vercel.app'
+    ];
+
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS blocked for origin: ${origin}`));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
-
 app.use(cors(corsOptions));
 app.use(express.json());
 
